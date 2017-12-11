@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['user'])){ // skip login
-	header("Location: main.php?action=next");
+	header("Location: index.php?action=next");
 } ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 	<body bgcolor="#4286f4" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 		<?php echo $message ?>
 		<table width="10%" border="0" cellspacing="5px" cellpadding="10px" align="center" height="10%">
-			<form method="post" action="main.php?action=auth">
+			<form method="post" action="index.php?action=auth">
 				<TR align = "center">
 					<TD/>
 					<TD>

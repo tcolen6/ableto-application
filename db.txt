@@ -1,0 +1,20 @@
+CREATE TABLE users(
+	name VARCHAR(20) NOT NULL PRIMARY KEY,
+	password VARCHAR(20) NOT NULL);
+
+CREATE TABLE questions(
+	id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	question VARCHAR(100) NOT NULL,
+	answers VARCHAR(100) NOT NULL);
+
+CREATE TABLE responses(
+	id int(8) AUTO_INCREMENT PRIMARY KEY,
+	date DATE NOT NULL,
+	user VARCHAR(20) NOT NULL,
+	question VARCHAR(100) NOT NULL,
+	answer VARCHAR(20) NOT NULL);
+
+INSERT INTO questions(question, answers) VALUES("What did you have for breakfast this morning?", "eggs|cereal|toast");
+INSERT INTO questions(question, answers) VALUES("How are you feeling today?", "happy|sad|angry");
+INSERT INTO questions(question, answers) VALUES("What time do you usually go to bed?", "9pm|10pm|11pm|12am");
+INSERT INTO questions(question, answers) VALUES("What type of music do you like the most?", "rock|pop|jazz|classical");	

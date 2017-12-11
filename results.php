@@ -12,10 +12,11 @@
         var data = google.visualization.arrayToDataTable([
           ['answer', 'frequency']
           <?php
-          	while (odbc_fetch_row($graph_data)) {
-          		$answer = odbc_result($graph_data, 'answer');
-          		if ($answer === "") $answer = "other";
-          		echo ",['".$answer."', ".odbc_result($graph_data, 'number')."]";
+          	//print graph data	
+          	for ($i = 0; $i < count($graph_data); $i++) {
+          		$explode = explode("|", $graph_data[$i]);
+          		if ($explode[0] === "") $explode[0] = "other";
+          		echo ",['".$explode[0]."', ".$explode[1]."]";
           	}
           ?>
         ]);
@@ -35,24 +36,23 @@
 <body bgcolor="#4286f4" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 	<table width="15%">
 		<tr><td><FONT color = "#FFFFFF">Logged in as: <?php echo $user; ?></FONT></td></tr>
-		<tr><td><a color = "#FFFFFF" href="main.php?action=signout">Sign Out</a></td></tr>
+		<tr><td><a color = "#FFFFFF" href="index.php?action=signout">Sign Out</a></td></tr>
 	</table>
 	<table width="40%" cellspacing="5px" cellpadding="10px" align="center">
 		<tr>
 			<td/><td><FONT color="#FFFFFF"><STRONG>Today's Responses</STRONG></FONT></td><td/>
 		</tr>
 		<?php
-			$i = 1;
-			while (odbc_fetch_row($responses))
-			{
-				echo '<tr><td><FONT color = "#FFFFFF">Question '.$i.':</FONT></td>';
-				echo '<td><FONT color = "#FFFFFF">'.odbc_result($responses, 'question').'</FONT></td>';
-				echo '<td><FONT color = "#FFFFFF">'.odbc_result($responses, 'answer').'</td></tr>';
-				$i++;
+			// print today's responses
+			for ($i=0; $i < count($responses); $i++) { 
+				$explode = explode("|", $responses[$i]);
+				echo '<tr><td><FONT color = "#FFFFFF">Question '.($i+1).':</FONT></td>';
+				echo '<td><FONT color = "#FFFFFF">'.$explode[0].'</FONT></td>';
+				echo '<td><FONT color = "#FFFFFF">'.$explode[1].'</td></tr>';
 			}
 		?>
 		<tr>
-			<form method="post" action="main.php?action=results">
+			<form method="post" action="index.php?action=results">
 				<td><FONT color="#FFFFFF"><select name = "user">
 					<option value="me">Me</option>
 					<option value="all">Everyone</option>
